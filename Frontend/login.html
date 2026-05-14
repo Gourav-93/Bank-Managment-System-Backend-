@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus Fintech | Login</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Login Specific Overrides and Layouts */
+      .login-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        width: 100%;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Abstract Background Blobs */
+      .blob {
+        position: absolute;
+        filter: blur(80px);
+        z-index: 0;
+        opacity: 0.6;
+        animation: floatBlob 10s infinite alternate ease-in-out;
+      }
+      .blob-1 {
+        width: 400px;
+        height: 400px;
+        background: rgba(99, 102, 241, 0.4);
+        top: -100px;
+        left: -100px;
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      }
+      .blob-2 {
+        width: 350px;
+        height: 350px;
+        background: rgba(168, 85, 247, 0.3);
+        bottom: -50px;
+        right: -50px;
+        border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+        animation-duration: 12s;
+        animation-direction: alternate-reverse;
+      }
+      @keyframes floatBlob {
+        0% {
+          transform: translateY(0) scale(1) rotate(0deg);
+        }
+        100% {
+          transform: translateY(-30px) scale(1.1) rotate(10deg);
+        }
+      }
+
+      /* Split Layout Container */
+      .login-container {
+        display: flex;
+        width: 100%;
+        max-width: 1000px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        border-radius: 1.5rem;
+        box-shadow:
+          var(--shadow-soft),
+          0 20px 40px rgba(0, 0, 0, 0.4);
+        z-index: 10;
+        overflow: hidden;
+        animation: loginCardFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+      }
+
+      @keyframes loginCardFadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Left Side: Branding */
+      .login-left {
+        flex: 1;
+        background: linear-gradient(
+          135deg,
+          rgba(18, 24, 38, 0.8),
+          rgba(11, 15, 25, 0.8)
+        );
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+      }
+
+      .login-left::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle at top right,
+          rgba(99, 102, 241, 0.15),
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+
+      .brand-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 2rem;
+      }
+
+      .brand-header h1 {
+        font-size: 2.5rem;
+        letter-spacing: -0.03em;
+        background: linear-gradient(to right, #fff, #cbd5e1);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .brand-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        background: var(--accent-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      }
+
+      .login-left p {
+        color: var(--text-secondary);
+        font-size: 1.15rem;
+        line-height: 1.6;
+        font-weight: 300;
+      }
+
+      .fintech-illustration {
+        margin-top: 3rem;
+        width: 100%;
+        opacity: 0.8;
+        /* Placeholder for an actual SVG illustration */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 6rem;
+        color: rgba(99, 102, 241, 0.2);
+        animation: floatBlob 6s infinite alternate ease-in-out;
+      }
+
+      /* Right Side: Form */
+      .login-right {
+        flex: 1.2;
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-right h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .login-subtitle {
+        color: var(--text-secondary);
+        margin-bottom: 2.5rem;
+        font-size: 1rem;
+      }
+
+      /* Input with Icons */
+      .floating-group.icon-input input {
+        padding-left: 3rem; /* Space for icon */
+      }
+      .floating-group.icon-input label {
+        left: 3rem;
+      }
+      .floating-group.icon-input > i:not(.toggle-password) {
+        position: absolute;
+        left: 1.2rem;
+        top: 1.25rem;
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        pointer-events: none;
+        transition: color 0.3s ease;
+      }
+      .floating-group.icon-input input:focus ~ i:not(.toggle-password) {
+        color: var(--primary);
+      }
+
+      /* Password Toggle */
+      .toggle-password {
+        position: absolute;
+        right: 1.2rem;
+        top: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: color 0.2s ease;
+        font-size: 1.1rem;
+      }
+      .toggle-password:hover {
+        color: #fff;
+      }
+
+      /* Security Elements (Remember me / Forgot) */
+      .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+      }
+
+      .checkbox-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .checkbox-container input {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        accent-color: var(--primary);
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .forgot-link {
+        color: #818cf8;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .forgot-link:hover {
+        color: #c084fc;
+      }
+
+      .btn-large {
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        margin-top: 0;
+        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+      }
+
+      .form-footer {
+        margin-top: 2.5rem;
+        text-align: center;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+      }
+      .form-footer a {
+        color: #818cf8;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      .form-footer a:hover {
+        color: #c084fc;
+      }
+
+      /* Responsive Breakpoints */
+      @media (max-width: 900px) {
+        .login-container {
+          flex-direction: column;
+          max-width: 500px;
+        }
+        .login-left {
+          padding: 3rem;
+          display: none; /* Hide branding on mobile for compactness, or keep minimal */
+        }
+        .login-right {
+          padding: 3rem;
+        }
+      }
+      @media (max-width: 500px) {
+        .login-right {
+          padding: 2rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="toast-container"></div>
+
+    <div class="login-page">
+      <!-- Background elements -->
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+
+      <div class="login-container">
+        <!-- Left Branding Side -->
+        <div class="login-left">
+          <div class="brand-header">
+            <div class="brand-icon"><i class="fa-solid fa-shapes"></i></div>
+            <h1>Nexus</h1>
+          </div>
+          <p>
+            Welcome to the next generation of digital banking. Secure, seamless,
+            and built for your financial growth.
+          </p>
+
+          <div class="fintech-illustration">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+        </div>
+
+        <!-- Right Form Side -->
+        <div class="login-right">
+          <h2>Sign In</h2>
+          <p class="login-subtitle">Securely access your dashboard</p>
+
+          <form id="loginForm" novalidate>
+            <div class="floating-group icon-input">
+              <input type="text" id="accountNumber" required placeholder=" " />
+              <label>Account Number</label>
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <div class="floating-group icon-input">
+              <input type="text" id="username" required placeholder=" " />
+              <label>Username</label>
+              <i class="fa-solid fa-lock"></i>
+              <i
+                class="fa-solid fa-eye toggle-password"
+                id="togglePasswordBtn"
+              ></i>
+            </div>
+
+            <div class="form-options">
+              <label class="checkbox-container">
+                <input type="checkbox" id="rememberMe" />
+                <span>Remember me</span>
+              </label>
+              <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="gradient-btn btn-large" id="loginBtn">
+              <span class="btn-text">Authenticate Securely</span>
+              <div class="btn-loader"></div>
+            </button>
+          </form>
+
+          <div class="form-footer">
+            Not a member yet?
+            <a href="index.html#create-account">Open an Account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="login.js"></script>
+  </body>
+</html>

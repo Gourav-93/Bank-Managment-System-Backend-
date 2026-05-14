@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Fintech | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon"><i class="fa-solid fa-shapes"></i></div>
+            <h1>Nexus</h1>
+        </div>
+        <div class="nav-links">
+            <div class="nav-item active" data-target="create-account">
+                <i class="fa-solid fa-user-plus"></i> <span>Open Account</span>
+            </div>
+            <div class="nav-item" data-target="credit-debit">
+                <i class="fa-solid fa-money-bill-transfer"></i> <span>Move Money</span>
+            </div>
+            <div class="nav-item" data-target="transfer">
+                <i class="fa-solid fa-paper-plane"></i> <span>Send Funds</span>
+            </div>
+            <div class="nav-item" data-target="balance">
+                <i class="fa-solid fa-wallet"></i> <span>Check Balance</span>
+            </div>
+            <div class="nav-item" data-target="statement">
+                <i class="fa-solid fa-chart-line"></i> <span>Statements</span>
+            </div>
+            
+            <!-- Separator space and Logout -->
+            <a href="login.html" class="nav-item" style="margin-top: auto; color: var(--danger); text-decoration: none;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sign Out</span>
+            </a>
+        </div>
+    </aside>
+
+    <div id="content-wrapper">
+        <header id="top-navbar">
+            <button id="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <div class="page-title">
+                <h2 id="current-page-title">Open Account</h2>
+                <span class="subtitle">Manage your wealth securely</span>
+            </div>
+            <div class="user-profile">
+                <div class="user-info">
+                    <span class="user-name">Welcome Back</span>
+                    <span class="user-role">Premium Member</span>
+                </div>
+                <div class="avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <!-- Create Account -->
+            <section id="create-account" class="section active">
+                <div class="glass-card form-container">
+                    <div class="card-header">
+                        <div class="icon-circle"><i class="fa-solid fa-user-shield"></i></div>
+                        <h3>New Account Registration</h3>
+                    </div>
+                    <form id="createAccountForm">
+                        <div class="form-row">
+                            <div class="floating-group">
+                                <input type="text" id="firstName" required placeholder=" ">
+                                <label>First Name</label>
+                            </div>
+                            <div class="floating-group">
+                                <input type="text" id="lastName" required placeholder=" ">
+                                <label>Last Name</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="floating-group">
+                                <select id="gender" required>
+                                    <option value="" disabled selected></option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <label class="select-label">Gender</label>
+                                <i class="fa-solid fa-chevron-down select-icon"></i>
+                            </div>
+                            <div class="floating-group">
+                                <input type="text" id="address" required placeholder=" ">
+                                <label>Address</label>
+                            </div>
+                        </div>
+                        <div class="floating-group">
+                            <input type="email" id="email" required placeholder=" ">
+                            <label>Email Address</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="tel" id="phone" required placeholder=" ">
+                            <label>Phone Number</label>
+                        </div>
+                        <button type="submit" class="gradient-btn">
+                            <span class="btn-text">Create Account</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Credit / Debit -->
+            <section id="credit-debit" class="section">
+                <div class="glass-card form-container">
+                    <div class="card-header">
+                        <div class="icon-circle"><i class="fa-solid fa-money-check-dollar"></i></div>
+                        <h3>Deposit or Withdraw</h3>
+                    </div>
+                    <form id="creditDebitForm">
+                        <div class="floating-group">
+                            <select id="transactionType" required>
+                                <option value="credit">Credit (Receive)</option>
+                                <option value="debit">Debit (Withdraw)</option>
+                            </select>
+                            <label class="select-label">Transaction Type</label>
+                            <i class="fa-solid fa-chevron-down select-icon"></i>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" id="cdAccountNumber" required placeholder=" ">
+                            <label>Account Number</label>
+                        </div>
+                        <div class="floating-group amount-group">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="cdAmount" step="0.01" min="1" required placeholder=" ">
+                            <label>Amount</label>
+                        </div>
+                        <button type="submit" class="gradient-btn">
+                            <span class="btn-text">Process Transaction</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Transfer -->
+            <section id="transfer" class="section">
+                <div class="glass-card form-container">
+                    <div class="card-header">
+                        <div class="icon-circle"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                        <h3>Peer-to-Peer Transfer</h3>
+                    </div>
+                    <form id="transferForm">
+                        <div class="floating-group">
+                            <input type="text" id="sourceAccount" required placeholder=" ">
+                            <label>From Account</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" id="destAccount" required placeholder=" ">
+                            <label>To Account</label>
+                        </div>
+                        <div class="floating-group amount-group">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="transferAmount" step="0.01" min="1" required placeholder=" ">
+                            <label>Transfer Amount</label>
+                        </div>
+                        <button type="submit" class="gradient-btn">
+                            <span class="btn-text">Initiate Transfer</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Balance -->
+            <section id="balance" class="section">
+                <div class="glass-card form-container text-center">
+                    <div class="card-header center-header">
+                        <div class="icon-circle large"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h3>Balance Overview</h3>
+                    </div>
+                    <form id="balanceForm">
+                        <div class="floating-group">
+                            <input type="text" id="balAccountNumber" required placeholder=" ">
+                            <label>Account Number</label>
+                        </div>
+                        <button type="submit" class="gradient-btn">
+                            <span class="btn-text">Check Balance</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </form>
+                    <div id="balanceDisplay" class="balance-display hidden">
+                        <p class="balance-label">Available Balance</p>
+                        <h2 class="balance-amount">$<span id="balAmountTxt">0.00</span></h2>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statement -->
+            <section id="statement" class="section">
+                <div class="glass-card statement-card">
+                    <div class="card-header flex-header">
+                        <div>
+                            <h3>Transaction History</h3>
+                            <p class="subtitle">Filter records by date range</p>
+                        </div>
+                        <div class="icon-circle"><i class="fa-solid fa-file-invoice"></i></div>
+                    </div>
+                    
+                    <form id="statementForm" class="filter-bar">
+                        <div class="floating-group filter-input">
+                            <input type="text" id="stmtAccountNumber" required placeholder=" ">
+                            <label>Account</label>
+                        </div>
+                        <div class="floating-group filter-input">
+                            <input type="date" id="startDate" required placeholder=" ">
+                            <label>From</label>
+                        </div>
+                        <div class="floating-group filter-input">
+                            <input type="date" id="endDate" required placeholder=" ">
+                            <label>To</label>
+                        </div>
+                        <button type="submit" class="gradient-btn small-btn">
+                            <i class="fa-solid fa-magnifying-glass btn-text"></i>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </form>
+                    
+                    <div class="table-container">
+                        <div id="emptyState" class="empty-state">
+                            <div class="empty-icon"><i class="fa-solid fa-receipt"></i></div>
+                            <h4>No Transactions Found</h4>
+                            <p>Try adjusting your search criteria or date range.</p>
+                        </div>
+
+                        <table id="statementTable" class="hidden">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statementTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
